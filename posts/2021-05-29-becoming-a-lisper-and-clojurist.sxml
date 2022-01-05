@@ -1,0 +1,161 @@
+;-*- scheme -*-
+(begin
+  (use-modules (srfi srfi-19))
+  (let ((cl "https://common-lisp.net/")
+        (clj "https://clojure.org/")
+        (el "https://www.gnu.org/software/emacs/manual/html_node/elisp/")
+        (sch "https://en.wikipedia.org/wiki/Scheme_(programming_language)")
+        (ema "https://www.gnu.org/software/emacs/ ")
+        (du "https://en.wikipedia.org/wiki/Top-down_and_bottom-up_design")
+        (nsp "https://nostarch.com/")
+        (lol "http://landoflisp.com/")
+        (cb "http://www.lisperati.com/")
+        (cbt "https://www.braveclojure.com/")
+        (dh "https://www.flyingmachinestudios.com/")
+        (eng "https://reword.ca/5-examples-of-how-the-english-language-makes-no-sense-at-all/")
+        (bk1 "https://letoverlambda.com/")
+        (bk2 "https://www.darkchestnut.com/book-common-lisp-application-deployment/")
+        (bk3 "https://www.amazon.com/dp/1785887637/ref=cm_sw_r_cp_ep_dp_t-Ekzb6FS2CQ3")
+        (bk4 "https://www.amazon.com/dp/1680500740/ref=cm_sw_r_cp_ep_dp_vEbkAbT77MYME")
+        (prj "http://www.programmr.com/blogs/importance-personal-project-software-developers")
+        (cry "http://cryogenweb.org/index.html")
+        (int "http://www.catb.org/~esr/faqs/hacker-howto.html")
+        (ijd "https://www.youtube.com/watch?v=wR2kYn-7ijQ"))
+    `((title .
+             "Becoming a LISPer (and Clojurist)")
+      (author .
+              "Christopher Rodriguez")
+      (tags "lisp" "clojure" "elisp" "programming")
+      (date . (unquote (make-date 0 0 0 0 29 5 2021 (* -5 3600))))
+      (content
+       (p "I grew tired of having a bare bones, empty website here. I've also
+recently discovered how much I enjoy "
+          ,(anchor "Common Lisp" cl)
+          ", "
+          ,(anchor "Clojure" clj)
+          ", and "
+          ,(anchor "elisp" el)
+          " (Sorry "
+          ,(anchor "Scheme" sch)
+          ", You haven't made the cut this time around).")
+       (p "So, tech blog it is.")
+       (h2 "Hesitation")
+       ,(codeblock "clojure"
+                   "(defn the-problem
+  []
+  (map #(str \"The Problem was \" %) [\"My Brain\\n\"
+                                   \"My Preconceptions\\n\"
+                                   \"My Ego\\n\"]))
+
+(map print (the-problem))")
+       (p "I use "
+          ,(anchor "Emacs" ema)
+          " as my editor of choice. So I suppose I should have realized a long
+time ago Lisps were to my liking. I guess I just never really put two and two
+together, there. But there was another barrier, too, and it was one I've
+realized I've struggled with for quite a long time, in many aspects of my
+life.")
+       (p "I didn't *want* to like Lisps. I *wanted* to like "
+          ,(anchor "down up" du)
+          " languages instead, because they were more efficient, used more in
+games and system code, and above all what I thought was cool.")
+       (p "I recently realized how much wanting to be a specific way has stood
+in my way in my life.")
+       (p "So often, I'll look at options presented to me and choose one based
+on what I like *conceptually* instead of *in practice*. And because I like the
+concept, I convince myself that I like the practice too—regardless of how
+comfortable I feel during that practice.")
+       (p "I'm sure there's some term for this in psychology; maybe I'll ask in
+my next therapy session.")
+       (p "But anyway, having given the Lisps another shot, I find myself quite
+comfortable using them.")
+       (h2 "Acceptance")
+       ,(codeblock "lisp"
+                   "(print
+ (destructuring-bind
+     (clj cl el)
+     (list
+      \"Clojure for the Brave and True\"
+      \"Land of Lisp\"
+      \"Emacs Itself\")
+   (list :clj clj :cl cl :el el)
+   ))")
+       (p "So, I "
+          ,(anchor "picked up" nsp)
+          " two books one night when I was suffering from
+insomnia (as I do from time to time): "
+          ,(anchor "Land of Lisp" lol)
+          ", by "
+          ,(anchor "Conrad Barski" cb)
+          ", and "
+          ,(anchor "Clojure For the Brave and True" cbt)
+          ", by "
+          ,(anchor "Daniel Higgenbottom" dh)
+          ".")
+       (p "I ordered both the physical books as well as the ebooks, and have in
+the following week been really enjoying my time with both of the ebooks. (I
+haven't yet recieved my physical books, but I can't imagine they would be any
+*worse*!) I particularly enjoy the rather snarky, fun-loving approach they both
+take to what could otherwise be a very dry topic. I also like how they are
+structured: They both focus on *making things* instead of on (overtly) *teaching
+concepts*.")
+       (p "And as for the languages they teach, well, they are both Lisps. But
+they *do* have some differences. "
+          ,(anchor "Common Lisp" cl)
+          " seems much more
+free wheeling and, in a way, less dogmatic than nearly every language
+I've ever learned before (aside, perhaps, from
+"
+          ,(anchor "English" eng)
+          "). Whereas "
+          ,(anchor "Clojure" clj)
+          " just... makes sense. In
+total. That's what really shook me: I *like* writing clojure code. I
+*like* the parts where it gets dogmatic. I *like* the limitations it
+has, and the ones it does not.")
+       (h2 "Execution")
+       ,(codeblock "emacs-lisp"
+                   "(defun becoming-a-lisper-and-clojurist ()
+  \"How I intend to proceed.\"
+  (interactive)
+  (move-beginning-of-line nil)
+  (org-insert-heading-respect-content)
+  (org-do-demote)
+  (insert \"Planning on Continuation and Development\")
+)
+
+(define-prefix-command 'lisp-prefix-map)
+(define-key lisp-prefix-map (kbd \"\\\") #'becoming-a-lisper-and-clojurist)
+(global-set-key (kbd \"C-<f5> lisp\") 'lisp-prefix-map)")
+       (p "I intend to see these books through first, obviously.")
+       (p "Once I finish with them, I will be migrating a lot of my code over to
+a (probably "
+          ,(anchor "Clojure" clj)
+          "-heavy) Lisp environment. While I'm doing that, I will "
+          ,(anchor "probably" bk1)
+          " pick "
+          ,(anchor "up" bk3)
+          " a "
+          ,(anchor "few" bk2)
+          " more "
+          ,(anchor "books" bk4)
+          ", just to ensure I have that round foundation I look for in most of
+the things I do (and which is the reason I will never be good at building things
+in meat-space, haha.)")
+       (p "Then I want to start some kind of bigger "
+          ,(anchor "project" prj)
+          ". It may or may not be related to this "
+          ,(anchor "site" cry)
+          ", but it will definitely be talked about on here. I don't want to
+commit to what it is yet, though, since that will be a bit far down the road.")
+       (p "It will hopefully be something that will be useful to me, maybe even
+at work. It will *have* to be something that "
+          ,(anchor "interests" int)
+          " me, so
+that I can stay the course and make real progress. And I want it to be
+something that challenges me, because while I will likely feel
+competent in Lisps by then I recognize that I still have a long way to
+go as a programmer.")
+       (p "But regardless, "
+          ,(anchor "it's just data" ijd)
+          ", right? Happy Hacking.")))))
