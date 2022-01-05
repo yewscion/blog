@@ -45,7 +45,9 @@
 (define %cc-by-sa-button
   '(a (@ (class "cc-button")
          (href "https://creativecommons.org/licenses/by-sa/4.0/"))
-      (img (@ (src "https://licensebuttons.net/l/by-sa/4.0/80x15.png")))))
+      (span (@ (class "fab fa-creative-commons") (style "color: black;") (title "Creative Commons")))
+      (span (@ (class "fab fa-creative-commons-by") (style "color: black;") (title "Attribution")))
+      (span (@ (class "fab fa-creative-commons-sa") (style "color: black;") (title "Share-Alike")))))
 
 (define (first-paragraph post)
   (let loop ((sxml (post-sxml post))
@@ -65,31 +67,33 @@
              (head
               (meta (@ (charset "utf-8")))
               (title ,(string-append title " — " (site-title site)))
-              ,(stylesheet "reset")
+              ,(stylesheet "normalize")
               ,(stylesheet "fonts")
               ,(stylesheet "prism")
               ,(stylesheet "yewscion"))
              (body
-               (header
-                (nav
-                        (ul (li ,(link "Yewscion" "/"))
-                            (li ,(link "About" "/about.html")))))
-               (main
-                   ,body)
-               (footer (@ (class "text-center"))
-                       (p (@ (class "copyright"))
-                          "© 2022 Christopher Rodriguez"
-                          ,%cc-by-sa-button)
-                       (p "The text and images on this site are
+              (header
+               (nav
+                (h1 ,(link "Yewscion" "/"))
+                (ul 
+                 (li ,(link "About" "/about.html")))))
+              (main
+               ,body)
+              (footer (@ (class "text-center"))
+                      (p (@ (class "copyright"))
+                         "© 2022 Christopher Rodriguez "
+                         ,%cc-by-sa-button)
+                      (p "The text and images on this site are
 free culture works available under the " ,%cc-by-sa-link " license.")
-                       (p "This website is built with "
-                          (a (@ (href "https://dthompson.us/projects/haunt.html"))
-                             "Haunt")
-                          ", a static site generator written in "
-                          (a (@ (href "https://gnu.org/software/guile"))
-                             "Guile Scheme")
-                          ".")))
-             ,(script-js "prism")))
+                      (p "This website is built with "
+                         (a (@ (href "https://dthompson.us/projects/haunt.html"))
+                            "Haunt")
+                         ", a static site generator written in "
+                         (a (@ (href "https://gnu.org/software/guile"))
+                            "Guile Scheme")
+                         ".")))
+             ,(script-js "prism")
+             (script (@ (src "https://kit.fontawesome.com/362bd4fa7d.js") (cross-origin "anonymous")))))
          #:post-template
          (lambda (post)
            `(article
@@ -113,9 +117,9 @@ free culture works available under the " ,%cc-by-sa-link " license.")
              (string-append "/" (or prefix "")
                             (site-post-slug site post) ".html"))
 
-           `((h1 ,title
+           `((h1 ,title " "
                  (a (@ (href "/feed.xml"))
-                    (img (@ (src "images/feed.png")))))
+                    (span (@ (class "fas fa-rss-square") (style "color: black; font-size: 1rem;") (title "RSS Feed")))))
              ,(map (lambda (post)
                      (let ((uri (string-append "/"
                                                (site-post-slug site post)
@@ -132,10 +136,10 @@ free culture works available under the " ,%cc-by-sa-link " license.")
                    posts)))))
 
 (define (static-page title file-name body)
-   (lambda (site posts)
-     (make-page file-name
-                (with-layout yewscion-theme site title body)
-                sxml->html)))
+  (lambda (site posts)
+    (make-page file-name
+               (with-layout yewscion-theme site title body)
+               sxml->html)))
 
 ;; (define* (project-page #:key name file-name description usage requirements
 ;;                        installation manual? license repo releases guix-package
