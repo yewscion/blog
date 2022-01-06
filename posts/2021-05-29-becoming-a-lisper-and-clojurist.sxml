@@ -55,14 +55,14 @@ time ago Lisps were to my liking. I guess I just never really put two and two
 together, there. But there was another barrier, too, and it was one I've
 realized I've struggled with for quite a long time, in many aspects of my
 life.")
-       (p "I didn't *want* to like Lisps. I *wanted* to like "
+       (p "I didn't " (em "want") " to like Lisps. I " (em "wanted") " to like "
           ,(anchor "down up" du)
           " languages instead, because they were more efficient, used more in
 games and system code, and above all what I thought was cool.")
        (p "I recently realized how much wanting to be a specific way has stood
 in my way in my life.")
        (p "So often, I'll look at options presented to me and choose one based
-on what I like *conceptually* instead of *in practice*. And because I like the
+on what I like " (em "conceptually") " instead of " (em "in practice") ". And because I like the
 concept, I convince myself that I like the practice too—regardless of how
 comfortable I feel during that practice.")
        (p "I'm sure there's some term for this in psychology; maybe I'll ask in
@@ -95,12 +95,12 @@ insomnia (as I do from time to time): "
        (p "I ordered both the physical books as well as the ebooks, and have in
 the following week been really enjoying my time with both of the ebooks. (I
 haven't yet recieved my physical books, but I can't imagine they would be any
-*worse*!) I particularly enjoy the rather snarky, fun-loving approach they both
+" (em "worse") "!) I particularly enjoy the rather snarky, fun-loving approach they both
 take to what could otherwise be a very dry topic. I also like how they are
-structured: They both focus on *making things* instead of on (overtly) *teaching
-concepts*.")
+structured: They both focus on " (em "making things") " instead of on (overtly) " (em "teaching
+concepts") ".")
        (p "And as for the languages they teach, well, they are both Lisps. But
-they *do* have some differences. "
+they " (em "do") " have some differences. "
           ,(anchor "Common Lisp" cl)
           " seems much more
 free wheeling and, in a way, less dogmatic than nearly every language
@@ -110,8 +110,8 @@ I've ever learned before (aside, perhaps, from
           "). Whereas "
           ,(anchor "Clojure" clj)
           " just... makes sense. In
-total. That's what really shook me: I *like* writing clojure code. I
-*like* the parts where it gets dogmatic. I *like* the limitations it
+total. That's what really shook me: I " (em "like") " writing clojure code. I
+" (em "like") " the parts where it gets dogmatic. I " (em "like") " the limitations it
 has, and the ones it does not.")
        (h2 "Execution")
        ,(codeblock "emacs-lisp"
@@ -149,7 +149,7 @@ in meat-space, haha.)")
           ", but it will definitely be talked about on here. I don't want to
 commit to what it is yet, though, since that will be a bit far down the road.")
        (p "It will hopefully be something that will be useful to me, maybe even
-at work. It will *have* to be something that "
+at work. It will " (em "have") " to be something that "
           ,(anchor "interests" int)
           " me, so
 that I can stay the course and make real progress. And I want it to be

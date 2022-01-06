@@ -73,7 +73,11 @@ nav  ul  li  a {
     margin-top: 1em;
     margin-bottom: 1em;
     background-color: #4627000A;
-    padding: 0 2em 0.5em 2em;
+    padding: 0.5rem 2rem;
+}
+
+.summary h2 {
+    margin-top: 0;
 }
 
 /* Footer */
