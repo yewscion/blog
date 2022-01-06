@@ -1,0 +1,77 @@
+;-*- scheme -*-
+(begin
+  (use-modules (srfi srfi-19)) ; For Dates
+  (let ; Any Links should be bound to symbols here.
+      ((drm "https://www.youtube.com/watch?v=3wuSCRRBvjM")
+       (sxp "https://en.wikipedia.org/wiki/S-expression")
+       (gix "https://guix.gnu.org/")
+       (gui "https://www.gnu.org/software/guile/")
+       (lsp "https://en.wikipedia.org/wiki/List_of_Lisp-family_programming_languages")
+       (apl "https://www.gnu.org/software/apl/")
+       (bsh "https://www.gnu.org/software/bash/")
+       (fth "https://hackaday.com/2017/01/27/forth-the-hackers-language/")
+       (sxl "https://en.wikipedia.org/wiki/SXML")
+       (xml "https://en.wikipedia.org/wiki/XML")
+       (inf "https://en.wikipedia.org/wiki/XML_Information_Set"))
+                                        ; Reference these below with
+                                        ; ,(anchor "text" symbol)
+    
+    `((title .
+             "S-expressions, S-expressions, S-expressions")
+      (author .
+              "Christopher Rodriguez")
+      (tags "lisp" "syntax" "sxml" "short")
+      ; make-date: ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 6 1 2022 (* -5 3600))))
+      (content
+       (p "Yeah, the title may be a reference to "
+          ,(anchor "Dr. Mike" drm)
+          "… But I keep saying it in my head, so I think it fits.")
+       (h2 "S-expressions")
+       ,(codeblock "scheme"
+                   "(define (main args)
+  (let ((arguments (cdr args)))
+    (cond ((not (equal? (length arguments) 2))
+           (display \"Need More Arguments!\"))
+          ((not (file-exists? (car arguments)))
+           (format #t \"ERROR: ~a does not exist!~%\" (car arguments)))
+          (else (push-all-git-repos (car arguments) (cadr arguments))))))")
+       (p "I've been slowly working to subsume all of my work into some form of "
+          ,(anchor "Symbolic Expression" sxp)
+          " for the last little while, and I think I've nearly done
+it! My OS of choice is "
+          ,(anchor "GNU Guix" gix)
+          ", my scripting language is "
+          ,(anchor "GNU Guile" gui)
+          ", and my programming language(s) of choice all fall under
+the "
+          ,(anchor "Lisp Family" lsp)
+          ". I'm very happy with it; I might dabble in other languages from time to time ("
+          ,(anchor "APL2" apl)
+          ", "
+          ,(anchor "Bash" bsh)
+          ", and "
+          ,(anchor "Forth" fth)
+          "come to mind there.) but I always have this comfortable and
+welcoming home filled with parentheses to come back to.")
+       (p "I've recently added to the first list above, too: This blog (and a
+lot of my future data documents) is written using "
+          ,(anchor "SXML" sxl)
+          ", which is an alternate syntax for writing "
+          ,(anchor "XML" xml)
+          " "
+          ,(anchor "Infosets" inf)
+          ". It lets me write these posts entirely in the same syntax I use for
+writing scripts, with only a few caveats (specific expectations for metadata
+tags, and all double-quotes in content need escaping). And that means that it is
+easier to write posts more consistently, because I won't need to look up syntax
+for things I use rarely.")
+       (p "And, because it is "
+          ,(anchor "XML" xml)
+          ", I don't need to worry about whether or not something is implemented
+in the markup language I choose! Regardless, it gets inserted into the HTML as
+though it were literal XML, and so I can just "
+         (em "write") "and not have to worry about the structure
+underneath being what I expect.")))))
+
+
