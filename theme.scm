@@ -15,6 +15,7 @@
 ;;; along with this program.  If not, see
 ;;; <http://www.gnu.org/licenses/>.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;
 ;;; This is an edited version of the theme from David Thompson's
 ;;; Website, with original code and other snippets added to customize
 ;;; it for my (yewscion's) blog. Any code pulled from other people is
@@ -64,36 +65,45 @@
          #:layout
          (lambda (site title body)
            `((doctype "html")
-             (head
-              (meta (@ (charset "utf-8")))
-              (title ,(string-append title " — " (site-title site)))
-              ,(stylesheet "normalize")
-              ,(stylesheet "fonts")
-              ,(stylesheet "prism")
-              ,(stylesheet "yewscion"))
-             (body
-              (header
-               (nav
-                (h1 ,(link "Yewscion" "/"))
-                (ul 
-                 (li ,(link "About" "/about.html")))))
-              (main
-               ,body)
-              (footer (@ (class "text-center"))
-                      (p (@ (class "copyright"))
-                         "© 2022 Christopher Rodriguez "
-                         ,%cc-by-sa-button)
-                      (p "The text and images on this site are
-free culture works available under the " ,%cc-by-sa-link " license.")
-                      (p "This website is built with "
-                         (a (@ (href "https://dthompson.us/projects/haunt.html"))
-                            "Haunt")
-                         ", a static site generator written in "
-                         (a (@ (href "https://gnu.org/software/guile"))
-                            "Guile Scheme")
-                         ".")))
-             ,(script-js "prism")
-             (script (@ (src "https://kit.fontawesome.com/362bd4fa7d.js") (cross-origin "anonymous")))))
+             (html
+              (head
+               (meta (@ (charset "utf-8")))
+               (title ,(string-append title " — " (site-title site)))
+               ,(stylesheet "normalize")
+               ,(stylesheet "fonts")
+               ,(stylesheet "prism")
+               ,(stylesheet "yewscion"))
+              (body
+               (header
+                (nav
+                 (h1 ,(link "Yewscion" "/"))
+                 (ul 
+                  (li ,(link "About" "/about.html")))))
+               (main
+                ,body)
+               (footer (@ (class "text-center"))
+                       (p (@ (class "copyright"))
+                          "© 2022 Christopher Rodriguez "
+                          ,%cc-by-sa-button)
+                       (p "The text and images on this site are free culture "
+                          "works available under the " ,%cc-by-sa-link " license.")
+                       (p "This website is built with "
+                          (a (@ (href "https://dthompson.us/projects/haunt.html"))
+                             "Haunt")
+                          ", a static site generator written in "
+                          (a (@ (href "https://gnu.org/software/guile"))
+                             "Guile Scheme")
+                          ".")
+                       (p "Background from "
+                          (a (@ (href "https://www.svgbackgrounds.com/")) "SVG Backgrounds")
+                          ". Most icons are part of "
+                          (a (@ (href "https://fontawesome.com/")) "Font Awesome")
+                          ". All content is written using "
+                          (a (@ (href "https://www.gnu.org/software/guile/manual/html_node/SXML.html"))
+                             "SXML")
+                          "."))
+               ,(script-js "prism")
+               (script (@ (src "https://kit.fontawesome.com/362bd4fa7d.js") (cross-origin "anonymous")))))))
          #:post-template
          (lambda (post)
            `(article
