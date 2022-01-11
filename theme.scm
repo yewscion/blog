@@ -119,7 +119,10 @@
               ,(post-sxml post))
              (footer
               (p
-               ,(post-ref post 'tags))
+               ,(map (lambda (x)
+                       `(a (@ (href ,(string-append "/feeds/tags/" x ".xml")))
+                           ,(string-append x " ")))
+                     (post-ref post 'tags)))
               )))
          #:collection-template
          (lambda (site title posts prefix)

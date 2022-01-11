@@ -24,7 +24,8 @@
             codeblock
             link
             centered-image
-            raw-snippet)
+            raw-snippet
+            endnote)
   #:replace (link))
 
 (define (date year month day)
@@ -67,3 +68,9 @@
      ,(if (string? code)
           code
           (read-string code)))))
+(define (endnote num)
+  `(sup (a
+         (@
+          (href ,(string-append "#en" (number->string num)))
+          (id ,(string-append "r" (number->string num))))
+         ,(string-append "[" (number->string num) "]"))))
