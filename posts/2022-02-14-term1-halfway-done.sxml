@@ -1,0 +1,193 @@
+;-*- mode: scheme; fill-column: 80; comment-column: 50; -*-
+(begin
+  (use-modules (srfi srfi-19))                    ; For Dates
+  (let
+                                                  ; Any Links should be bound to
+                                                  ; symbols here.
+      ((csu "https://learn.csuglobal.edu/")
+       (ftn "https://yewscion.com/school-citing.html#r3")
+       (ltx "https://www.latex-project.org/")
+       (yak "https://projects.csail.mit.edu/gsb/old-archive/gsb-archive/gsb2000-02-11.html")
+       (hkr "https://www.hackerrank.com/")
+       (cws "https://www.codewars.com/")
+       )
+                                                  ; Reference these below with
+                                                  ; ,(anchor "text" symbol)
+    
+    `((title .
+             "Term 1 - Halfway Done!")
+      (author .
+              "Christopher Rodriguez")
+      (tags "school" "latex" "citation" "writing")
+                                                  ; make-date
+                                                  ; ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 14 2 2022 (* -5 3600))))
+      (content
+                                                  ; Most Posts should have 1-3
+                                                  ; h2 elements. The h1 is
+                                                  ; reserved for the site
+                                                  ; title. Make sure to create
+                                                  ; link symbols above. And
+                                                  ; remember to escape all
+                                                  ; double-quotes!
+       (p "Today marks the first day of my fifth week back at "
+          ,(anchor "school" csu)
+          " and I wanted to take a moment of pause and consider how things are
+going. With 8-week terms, this means I have completed exactly 50% of this term,
+and it might be a good idea to check in with some self reflection"
+          ,(endnote 1)
+          " or something similar, to make sure I am on track and doing things
+the way I'd like.")
+       (h2 "Research and LaTeX")
+       ,(codeblock "scheme"
+                   "(define bottom (if (eq? (length stack) 1)
+                   (car stack)
+                   (let ((x (pop stack)))
+                     (recurse)
+                     (push x stack))))
+
+(define copy-of-myStack (let ((x (pop stack)))
+                          (if (not (empty? Stack)) recurse)
+                          (push x stack)
+                          (push x newstack)))
+
+(while (not (empty? queue))
+  (pop queue last)")
+       (p "I mentioned this briefly in a past "
+          ,(anchor "footnote" ftn)
+          ", but I used "
+          ,(anchor "LaTeX" ltx)
+          " extensively when I was self employed, to create handouts and sheet
+music. It was good experience for me, considering what I'm doing now"
+          ,(endnote 2)
+          ", but it also means that I have very high standards when it comes to
+how my published works look. I " (em "like") " that there is a strict way of
+doing things, and that there will always be the same result. I dunno, it makes
+me happy knowing the format is Not My Problem™ right now.")
+       (p "As for how I'm doing… Eh… I've been better, but also much worse. I have a "
+          (em "major") " issue with time management, especially when it comes to
+keeping on top of my work. I've let things get a little away from me, mostly through "
+          ,(anchor "yak shaving" yak)
+          " and such. In some ways it can be very helpful in the long term: I've
+recently developed a template for my papers that should make writing one in the
+future quite easy. However, it makes the weekly submissions of work something
+difficult to keep up with, and unfortunately right now I am behind by three
+papers"
+          ,(endnote 3)
+          ".")
+       (p "But what I've learned is that I really do enjoy the actual "
+          (em "research")
+          " parts of the schooling process! I feel such a sense of satisfaction
+from building up a bibliography of papers to reference and works I can cite. I
+enjoy being awash in new ideas and connecting disparate concepts to discover new
+things. I even found a way that I enjoy taking "
+          (em "handwritten notes")
+          ,(endnote 4)
+          ", which I always thought of as something beyond my reach. It is so
+fulfilling to me; I am honestly considering continuing my education passed the
+bachelor level, maybe even to "
+          (strong "doctorate")
+          "! I dunno! This is a new feeling for me, honestly, and I am still
+figuring it out.")
+       ,(codeblock "latex"
+                   "\\usepackage{geometry}
+\\geometry{
+  letterpaper,
+  left=1in,
+  right=1in,
+  top=1in,
+  bottom=1in}
+\\usepackage{etoolbox}
+\\patchcmd{\\titlepage}
+  {\\thispagestyle{empty}}
+  {\\thispagestyle{fancy}}
+  {}
+  {}
+\\usepackage{fancyhdr}
+\\pagestyle{fancy}
+\\lhead{}
+\\chead{}
+\\rhead{\\thepage}
+\\lfoot{}
+\\cfoot{}
+\\rfoot{}
+\\renewcommand{\\headrulewidth}{0pt}
+\\usepackage[utf8]{inputenc}
+\\usepackage{babel,csquotes,xpatch}% recommended
+\\selectlanguage{english}
+\\usepackage[backend=biber,style=apa]{biblatex}
+\\usepackage[doublespacing]{setspace}
+\\usepackage{indentfirst}
+\\usepackage{fontspec}
+\\setmainfont{Nimbus Roman}
+\\appto{\\bibsetup}{\\raggedright}
+\\bibliography{\\~/Documents/biblio/main.bib}
+\\DeclareLanguageMapping{english}{american-apa}
+\\setlength{\\parindent}{4em}
+\\usepackage{titlesec}
+\\titleformat{\\section}
+  {\\centering\\normalfont\\normalsize\\bfseries}{\\thesection.}{1em}{}
+\\titleformat{\\subsection}
+  {\\normalfont\\normalsize\\itshape}{\\thesubsection.}{1em}{}
+\\titleformat{\\subsubsection}
+  {\\normalfont\\normalsize\\itshape}{\\thesubsubsection.}{1em}{}")
+       (h2 "Looking Forward")
+       (p "I also have a mentor who has a Masters in Computer Science! She is
+helping me by providing a professional eye to what I'm learning at school; Our
+biweekly meetings have helped me greatly already, and there's only been three of
+them. She's recommended I join "
+          ,(anchor "hackerrank" hkr)
+          ", though I already have experience at a "
+          ,(anchor "different site" cws)
+          ", and we are going to work through some problems each week to help
+solidify my knowledge of data structures and algoritms!")
+       (p "I used to be "
+          (em "quite")
+          " proud that I was self-taught when it came to computers. Though I
+will never say that someone who is self-taught can't be as or more capable than
+someone with a formal education, I'm really glad that I am able to branch out
+into a more formal solidification of the bits of knowledge I've collected. I've
+really begun to realize how much I don't know, and I cannot wait to get started!"
+          ,(endnote 5))
+       (p "As for now, I am going to keep this post fairly short. I am very
+tired today, and I have to write a bunch of papers this week. I'm gonna head
+home and try to get a good night's rest, so that I can better tackle starting on
+all of that work tomorrow. Wish me luck!")
+       (hr)
+       (section (@ (class "endnotes"))
+                (p (@ (id "en1"))
+                   (a (@ (href "#r1")) "[1]")
+                   "I'm obligated to take a course on 'Applying Leadership
+Principles' by my school, and while I do still which I didn't need to take it at
+all, I'd be lying if I said it wasn't benefitting me at all. It's helped me get
+a (tenuous) handle on my time management, and the focus on self reflection and
+self knowledge has helped me work through some things I've been struggling with
+for a while. I guess it is a worthwhile course after all.")
+                (p (@ (id "en2"))
+                   (a (@ (href "#r2")) "[2]")
+                   "I regularly attribute the majority of my computer skills to
+my love of doing things in plaintext. Perhaps I'll write a bigger post on that
+later. But also, I mean, the fact is that I can use my skills with latex to make
+things easier for me now! It's much easier to have the bibliography
+auto-generated based on my existing Biblatex database and my format consistent
+no matter what than to fiddle around with a word processor forever!")
+                (p (@ (id "en3"))
+                   (a (@ (href "#r3")) "[3]")
+                   "It sounds a lot worse than it is, to be honest. I have most
+of the only one that will have a penalty applied to it done already, one of them
+is very simple and about 'Leadership' (so I don't care quite as much as the
+others), and the final one is only three pages long. I will get caught up by the
+end of the week, no problem.")
+                (p (@ (id "en4"))
+                   (a (@ (href "#r4")) "[4]")
+                   "As anyone who has had the misfortune to need to read
+something that I have written out by hand will tell You, my writing skills could
+use some focus. Unfortunately, I have had little cause outside of commonplacing
+and now my Zettelkasten to work of this… Perhaps, now that I am writing out
+notes almost daily, I'll become motivated one day! Eh, at least "
+                   (em "I")
+                   "can read it…")
+                (p (@ (id "en5"))
+                   (a (@ (href "#r5")) "[5]")
+                   "It turns out that, in the end, I simply like learning, I
+guess. Oh, and computers."))))))
