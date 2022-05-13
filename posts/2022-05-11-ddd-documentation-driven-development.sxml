@@ -1,0 +1,88 @@
+;-*- mode: scheme; fill-column: 80; comment-column: 50; -*-
+(begin
+  (use-modules (srfi srfi-19))                    ; For Dates
+  (let
+                                                  ; Any Links should be bound to
+                                                  ; symbols here.
+      ((blog "https://yewscion.com")
+       (home "https://cdr255.com")
+       (javadoc
+        "https://docs.oracle.com/en/java/javase/13/javadoc/javadoc.html")
+       (jsdoc "")
+       (slurp "http://www.catb.org/jargon/html/S/slurp.html"))
+                                                  ; Reference these below with
+                                                  ; ,(anchor "text" symbol)
+    `((title .
+             "DDD: Documentation Driven Development?")
+      (author .
+              "Christopher Rodriguez")
+      (tags "documentation" "software" "jsdoc" "javascript")
+                                                  ; make-date
+                                                  ; ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 11 5 2022 (* -4 3600))))
+      (content
+                                                  ; Most Posts should have 1-3
+                                                  ; h2 elements. The h1 is
+                                                  ; reserved for the site
+                                                  ; title. Make sure to create
+                                                  ; link symbols above. And
+                                                  ; remember to escape all
+                                                  ; double-quotes!
+       (p "Documentation seems to be quickly defining itself as one of my
+specialties at work. Not that I mind; I've always felt that documentation was
+nearly as important as the source code itself. But I spent a large time again
+this week going through code and writing down what it did, without making any
+substantial changes to how it ran. And I think it is actually a really fun
+pastime"  ,(endnote 1) ".")
+       (h2 "JSDoc")
+       ,(codeblock "javascript"
+                   "/**
+ * Solves equations of the form a * x = b
+ * @example
+ * // returns 2
+ * globalNS.method1(5, 10);
+ * @example
+ * // returns 3
+ * globalNS.method(5, 15);
+ * @returns {Number} Returns the value of x for the equation.
+ */
+globalNS.method1 = function (a, b) {
+    return b / a;
+};")
+       (p "I also have sort of been pidgeonholed as a Javascript developer…
+Because the only alternative is python" ,(endnote 2) ". So, I was glad to
+discover that the Javascript ecosystem had something not dissimilar to "
+,(anchor "JavaDoc" javadoc) ", which I have used in the past. Since we minify
+all of our code anyway, there's no need to worry about adding some comments here
+or there, especially not when we'll have a full documentation site afterwards.")
+       (p "The tool I'm talking about here is called " ,(anchor "JSDoc"
+jsdoc) ", which is as similar a name as it a tool. The basic concept is to
+document Your code with comments in a specific format, so another program can
+slurp" ,(endnote 3) " the code and extract the comments to turn into a static
+website full of documentation. There are specific symbols to use to denote
+things like returns or parameters, and in general it is Good Enough™ for this
+purpose.")
+       (p "This also makes the resulting Javascript respond (almost) like a Lisp
+REPL with regards to functions being self-documenting! At least, when a language
+server is running underneath. I'm reminded of that meme about emulating a
+fraction of our power. Oh well, at least I get to code, yeah?")
+       (hr)
+       (section (@ (class "endnotes"))
+                (p (@ (id "en1"))
+                   (a (@ (href "#r1")) "[1]")": "
+                   "Writing Documentation is a completely different skill to me
+than writing code. It's one thing to be able to define a working system, and
+it's another thing completely to write something that tells a stranger how that
+system works.")
+                (p (@ (id "en2"))
+                   (a (@ (href "#r2")) "[2]")": "
+                   "I don't really have the time or space here to write out all
+of the reasons I dislike Python right now, but some highlights include the
+significant whitespace, the (very) low bar for entry and quality, the 2/3 split
+still existing after nearly a decade, and the failure to adhere to \"There's
+only one way to do it!\" I have to use it in some of my classes at school, and
+yup, I still hate coding in Python.")
+                (p (@ (id "en3"))
+                   (a (@ (href "#r3")) "[3]")": "
+                   "This is one of my favorite bits of jargon. " ,(anchor "Here"
+slurp) " is a definition, if You are unfamiliar."))))))
