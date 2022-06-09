@@ -1,0 +1,47 @@
+;-*- mode: scheme; fill-column: 80; comment-column: 50; -*-
+(begin
+  (use-modules (srfi srfi-19))                    ; For Dates
+  (let
+                                                  ; Any Links should be bound to
+                                                  ; symbols here.
+      ((blog "https://yewscion.com")
+       (home "https://cdr255.com")
+       (zettelkasten "https://en.wikipedia.org/wiki/Zettelkasten"))
+                                                  ; Reference these below with
+                                                  ; ,(anchor "text" symbol)
+    
+    `((title .
+             "Taking a Zettel Break")
+      (author .
+              "Christopher Rodriguez")
+      (tags "knowledge-management" "school" "study" "writing")
+                                                  ; make-date
+                                                  ; ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 6 6 2022 (* -5 3600))))
+      (content
+                                                  ; Most Posts should have 1-3
+                                                  ; h2 elements. The h1 is
+                                                  ; reserved for the site
+                                                  ; title. Make sure to create
+                                                  ; link symbols above. And
+                                                  ; remember to escape all
+                                                  ; double-quotes!
+       (p "I am enamoured with the idea of the "
+          ,(anchor "zettelkasten" zettelkasten)
+          ", and when I started again trying to pursue university I made a very impulsive
+decision to set one up. It helped some things, for sure: I would not have been
+able to complete my final speech on time in term 1 if I didn't have my
+zettelkasten to rely on. However, I've recently discovered that maintaining a
+zettelkasten might be antithetical to getting my BS in Computer Science. I hope
+to explore why here.")
+       (h2 "First Header")
+       ,(codeblock "scheme"
+                   "(display \"Hello world!\")")
+       (p ""
+                    ,(endnote 1))
+       (hr)
+       (section (@ (class "endnotes"))
+                (p (@ (id "en1"))
+                   (a (@ (href "#r1")) "[1]")": "
+                   "First Endnote")
+                )))))
