@@ -35,30 +35,8 @@
   #:use-module (srfi srfi-19)
   #:use-module (srfi srfi-1)
   #:use-module (utils)
-  #:export (yewscion-theme
-            static-page
-            project-page))
-
-(define %cc-by-sa-link
-  '(a (@ (href "https://creativecommons.org/licenses/by-sa/4.0/"))
-      "Creative Commons Attribution Share-Alike 4.0 International"))
-
-(define %cc-by-sa-button
-  '(a (@ (class "cc-button")
-         (href "https://creativecommons.org/licenses/by-sa/4.0/"))
-      (span (@ (class "fab fa-creative-commons") (style "color: black;") (title "Creative Commons")))
-      (span (@ (class "fab fa-creative-commons-by") (style "color: black;") (title "Attribution")))
-      (span (@ (class "fab fa-creative-commons-sa") (style "color: black;") (title "Share-Alike")))))
-
-(define (first-paragraph post)
-  (let loop ((sxml (post-sxml post))
-             (result '()))
-    (match sxml
-      (() (reverse result))
-      ((or (('p ...) _ ...) (paragraph _ ...))
-       (reverse (cons paragraph result)))
-      ((head . tail)
-       (loop tail (cons head result))))))
+  #:use-module (haunt artifact)
+  #:export (yewscion-theme))
 
 (define yewscion-theme
   (theme #:name "yewscion"
@@ -81,27 +59,36 @@
                   (li ,(link "About" "/about.html")))))
                (main
                 ,body)
-               (footer (@ (class "text-center"))
-                       (p (@ (class "copyright"))
-                          "© 2022 Christopher Rodriguez "
-                          ,%cc-by-sa-button)
-                       (p "The text and images on this site are free culture "
-                          "works available under the " ,%cc-by-sa-link " license.")
-                       (p "This website is built with "
-                          (a (@ (href "https://dthompson.us/projects/haunt.html"))
-                             "Haunt")
-                          ", a static site generator written in "
-                          (a (@ (href "https://gnu.org/software/guile"))
-                             "Guile Scheme")
-                          ".")
-                       (p "Background from "
-                          (a (@ (href "https://www.svgbackgrounds.com/")) "SVG Backgrounds")
-                          ". Most icons are part of "
-                          (a (@ (href "https://fontawesome.com/")) "Font Awesome")
-                          ". All content is written using "
-                          (a (@ (href "https://www.gnu.org/software/guile/manual/html_node/SXML.html"))
-                             "SXML")
-                          "."))
+               (footer
+                (nav
+                 (ul
+                  (li
+                   (a (@ (href "https://fediring.net/previous?host=yewscion.com")) (character "←"))
+                   (a (@ (href "https://fediring.net/")) "Fediring")
+                   (a (@ (href "https://fediring.net/random")) "⇄")
+                   (a (@ (href "https://fediring.net/next?host=yewscion.com")) "→"))))
+                (p (@ (class "copyright"))
+                   "© 2022 Christopher Rodriguez "
+                   ,%cc-by-sa-button
+                   " (I'm on the "
+                   (a (@ (rel "me") (href "https://tech.lgbt/@yewscion")) "Fediverse")
+                   ")")
+                (p "The text and images on this site are free culture "
+                   "works available under the " ,%cc-by-sa-link " license.")
+                (p "This website is built with "
+                   (a (@ (href "https://dthompson.us/projects/haunt.html"))
+                      "Haunt")
+                   ", a static site generator written in "
+                   (a (@ (href "https://gnu.org/software/guile"))
+                      "Guile Scheme")
+                   ". Background from "
+                   (a (@ (href "https://www.svgbackgrounds.com/")) "SVG Backgrounds")
+                   ". Most icons are part of "
+                   (a (@ (href "https://fontawesome.com/")) "Font Awesome")
+                   ". All content is written using "
+                   (a (@ (href "https://www.gnu.org/software/guile/manual/html_node/SXML.html"))
+                      "SXML")
+                   "."))
                ,(script-js "prism")
                (script (@ (src "https://kit.fontawesome.com/362bd4fa7d.js") (cross-origin "anonymous")))))))
          #:post-template
@@ -118,7 +105,7 @@
              (main
               ,(post-sxml post))
              (footer
-              (p
+              (p "RSS Feeds for Tags: "
                ,(map (lambda (x)
                        `(a (@ (href ,(string-append "/feeds/tags/" x ".xml")))
                            ,(string-append x " ")))
@@ -145,15 +132,8 @@
                                                  "~B ~d, ~Y"))
                              (div (@ (class "post"))
                                   ,(first-paragraph post))
-                             (a (@ (href ,uri)) "read more ➔"))))
+                             (a (@ (href ,uri)) "read more →"))))
                    posts)))))
-
-(define (static-page title file-name body)
-  (lambda (site posts)
-    (make-page file-name
-               (with-layout yewscion-theme site title body)
-               sxml->html)))
-
 ;; (define* (project-page #:key name file-name description usage requirements
 ;;                        installation manual? license repo releases guix-package
 ;;                        (irc-channel "#guile"))

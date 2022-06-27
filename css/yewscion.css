@@ -39,21 +39,21 @@ a {
 }
 
 /* Navigation */
-nav {
+header nav {
     display: grid;
     grid-template-columns: 10em 10em 10em;
 }
-nav h1 {
+header nav h1 {
     font-family: 'Fleur De Leah', cursive;
     font-size: 3em;
 }
-nav h1 a {
+header nav h1 a {
     color: #462700;
 }
-nav h1 a:visited {
+header nav h1 a:visited {
     color: #462700;
 }
-nav ul li {
+header nav ul li {
     display: inline-block;
     list-style-type: none;
     transition: all 0.2s;
@@ -61,7 +61,7 @@ nav ul li {
     width: 100%;
     text-align: center;
 }
-nav  ul  li  a {
+header nav  ul  li  a {
     color: #462700;
     display: block;
     font-weight: 300;
@@ -85,8 +85,37 @@ footer {
     margin-top: 2em;
     text-align: center;
     font-weight: 300;
-    font-style: italic;
     font-size: small;
+}
+
+footer p {
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+footer nav {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+footer nav ul {
+    font-size: larger;
+    padding: 0;
+}
+
+footer nav ul li {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+    display: inline-block;
+    list-style-type: none;
+    background-color: #4627000A;
+    border-left: solid #4627001A;
+    border-right: solid #4627001A;
+
+}
+
+footer nav ul li a {
+    padding: 0.5em;
 }
 
 /* Mobile First Design */
@@ -94,8 +123,7 @@ footer {
     body {
         width: 90%;
         padding: 5%;
-    }
-    
+    }   
 }
 
 
@@ -110,3 +138,4 @@ footer {
         border-right: 1em solid #46270022;
     }
 }
+

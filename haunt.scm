@@ -29,8 +29,8 @@
       #:builders (list (blog #:theme yewscion-theme)
                        (atom-feed)
                        (atom-feeds-by-tag)
-                       about-page                      
                        (static-directory "css")
                        (static-directory "js")
-                       (static-directory "code")))
+                       (static-directory "code")
+                       about-page))
 
