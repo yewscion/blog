@@ -1,0 +1,89 @@
+;-*- mode: scheme; fill-column: 80; comment-column: 50; -*-
+(begin
+  (use-modules (srfi srfi-19))                    ; For Dates
+  (let
+                                                  ; Any Links should be bound to
+                                                  ; symbols here.
+      ((blog "https://yewscion.com")
+       (home "https://cdr255.com")
+       (zettelkasten "https://en.wikipedia.org/wiki/Zettelkasten"))
+                                                  ; Reference these below with
+                                                  ; ,(anchor "text" symbol)
+    
+    `((title .
+             "Taking a Zettel Break")
+      (author .
+              "Christopher Rodriguez")
+      (tags "knowledge-management" "school" "study" "writing")
+                                                  ; make-date
+                                                  ; ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 6 6 2022 (* -5 3600))))
+      (content
+                                                  ; Most Posts should have 1-3
+                                                  ; h2 elements. The h1 is
+                                                  ; reserved for the site
+                                                  ; title. Make sure to create
+                                                  ; link symbols above. And
+                                                  ; remember to escape all
+                                                  ; double-quotes!
+       (p "I am enamoured with the idea of the "
+          ,(anchor "zettelkasten" zettelkasten)
+          ", and when I started again trying to pursue university I made a very
+impulsive decision to set one up. It helped some things, for sure: I would not
+have been able to complete my final speech on time in term 1 if I didn't have my
+zettelkasten to rely on. However, I've recently discovered that maintaining a
+zettelkasten might be antithetical to getting my BS in Computer Science. I hope
+to explore why here.")
+       (h2 "The Zettelkasten Model")
+       ,(codeblock "scheme"
+                   "(define (static-page title file-name body)
+  (serialized-artifact file-name body
+                       (lambda (site posts)
+                         (with-layout yewscion-theme title body)
+                         sxml->html)))")
+       (p "From the way I understand it"
+          ,(endnote 1)
+          ", the main workflow for using a Zettelkasten basically goes like this:"
+          (ol
+           (li "Find something interesting.")
+           (li "Read that something through, noting the parts You want to take note of.")
+           (li "Make the notes for those parts.")
+           (li "File them in the Zettelkasten, which now has that information forever."))
+          "This is a very useful and thorough process, that requires full
+understanding and interpretation of the material You are interfacing with. It
+seems like the best way to digest information, especially for someone who will
+be digesting a large amount of information and (hopefully) feeding it back into
+a new paper that others might do the same to. For all intents and purposes, it
+is a great system.")
+       (p "But it is " (em "slow!",(endnote 2)))
+       (p "I was barely able to keep up for the first two terms, mostly because
+so much of my 'school' time was set aside for going through the backlog of
+zettels that I had to write out and store. Since I have put the zettelkasten
+away, I've found it much easier to keep up with the increasing
+workload (sometimes I'll have to reference upwards of 8 new articles in a week!
+Ingesting them into the zettelkasten would have taken me a full day by itself!)
+and think I'll reserve the zettelkasten for information
+I " (em "definitely") "want to reference in my own work… At least until I get my
+Bachelor's of Science in Computer Science. Once I'm in graduate school"
+,(endnote 3)", I'm hopeful I will be able to take the time to do this
+properly.")
+       (hr)
+       (section (@ (class "endnotes"))
+                ,(endnote-content 1 "This could be very wrong, obviously, though
+if it is I think I would like to explore the idea as I understand it before
+learning the 'correct' way. Once I am out of my undergraduate education, I
+intend to reignite my efforts. Maybe I'll make an update then.")
+                
+                ,(endnote-content 2 "I don't mean this necessarily in the general
+sense. If You are able to focus on one piece of information for a longer period
+of time, I am confident my problems with the zettelkasten would no longer be
+accurate. But when You are constantly context-switching and juggling a full time
+job, 8 week courses, and an obsessively-minded researching style, it can make
+reading three or four papers a bit of a lag.")
+                
+                ,(endnote-content 3 "Maybe the solution actually lies within
+being more picky about what I add. But It's hard to do that when taking so much
+general education! Once my studies are more about " '(em "my") " studies, I
+think doing this kind of knowledge work will be much more
+straightforward."))))))
+
