@@ -36,7 +36,8 @@
             static-page
             %cc-by-sa-button
             %cc-by-sa-link
-            first-paragraph)
+            first-paragraph
+            endnote-content)
   #:replace (link))
 
 (define (date year month day)
@@ -80,11 +81,20 @@
           code
           (read-string code)))))
 (define (endnote num)
-  `(sup (a
-         (@
-          (href ,(string-append "#en" (number->string num)))
-          (id ,(string-append "r" (number->string num))))
-         ,(string-append "[" (number->string num) "]"))))
+  (let ((number (number->string num)))
+    `(sup (a
+           (@
+            (href ,(string-append "#en" number))
+          (id ,(string-append "r" number)))
+         ,(string-append "[" number "]")))))
+
+(define* (endnote-content num #:rest body)
+  (let ((number (number->string num)))
+    `(p (@ (id ,(string-append "en" number)))
+        (a (@ (href ,(string-append "#r" number)))
+           ,(string-append "[" number "]"))
+        ": "
+        ,body)))
 
 (define %cc-by-sa-link
   '(a (@ (href "https://creativecommons.org/licenses/by-sa/4.0/"))
