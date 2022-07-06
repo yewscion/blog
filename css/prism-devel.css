@@ -1,5 +1,5 @@
-/* PrismJS 1.25.0
-https://prismjs.com/download.html#themes=prism-dark&languages=markup+css+clike+javascript+apacheconf+apl+asciidoc+bash+basic+bbcode+bison+bnf+brainfuck+c+csharp+cpp+chaiscript+clojure+cmake+cobol+css-extras+csv+d+diff+dns-zone-file+docker+dot+ebnf+elixir+elm+excel-formula+fortran+git+go+go-module+graphql+haskell+haxe+http+hpkp+hsts+idris+ignore+inform7+io+j+java+javadoc+javadoclike+javastacktrace+julia+kotlin+latex+less+lilypond+liquid+lisp+log+lua+makefile+markdown+markup-templating+moonscript+nasm+nginx+nim+nix+ocaml+perl+php+php-extras+plsql+powerquery+powershell+prolog+python+qml+r+racket+regex+renpy+rest+ruby+rust+sass+scss+scala+scheme+shell-session+smalltalk+sql+systemd+tcl+textile+toml+typescript+uri+v+vala+wasm+wiki+wren+yaml+zig&plugins=line-numbers+autolinker+file-highlight+show-language+inline-color+command-line+toolbar+match-braces+treeview */
+/* PrismJS 1.28.0
+https://prismjs.com/download.html#themes=prism-dark&languages=markup+css+clike+javascript+apl+awk+bash+bnf+c+csharp+cpp+clojure+css-extras+csv+diff+docker+ebnf+elm+fortran+git+linker-script+hcl+http+hpkp+hsts+ignore+inform7+j+java+javadoc+javadoclike+javastacktrace+jsdoc+js-extras+json+json5+jsonp+jsstacktrace+latex+lilypond+lisp+lua+makefile+markdown+markup-templating+nasm+nginx+ocaml+plant-uml+powershell+regex+ruby+rust+scheme+smalltalk+sql+typescript+typoscript+yaml&plugins=line-highlight+line-numbers+autolinker+file-highlight+show-language+inline-color+command-line+toolbar+download-button+match-braces+treeview */
 /**
  * prism.js Dark theme for JavaScript, CSS and HTML
  * Based on the slides of the talk “/Reg(exp){2}lained/”
@@ -128,6 +128,77 @@ pre[class*="language-"] {
 
 .token.deleted {
 	color: red;
+}
+
+pre[data-line] {
+	position: relative;
+	padding: 1em 0 1em 3em;
+}
+
+.line-highlight {
+	position: absolute;
+	left: 0;
+	right: 0;
+	padding: inherit 0;
+	margin-top: 1em; /* Same as .prism’s padding-top */
+
+	background: hsla(24, 20%, 50%,.08);
+	background: linear-gradient(to right, hsla(24, 20%, 50%,.1) 70%, hsla(24, 20%, 50%,0));
+
+	pointer-events: none;
+
+	line-height: inherit;
+	white-space: pre;
+}
+
+@media print {
+	.line-highlight {
+		/*
+		 * This will prevent browsers from replacing the background color with white.
+		 * It's necessary because the element is layered on top of the displayed code.
+		 */
+		-webkit-print-color-adjust: exact;
+		color-adjust: exact;
+	}
+}
+
+	.line-highlight:before,
+	.line-highlight[data-end]:after {
+		content: attr(data-start);
+		position: absolute;
+		top: .4em;
+		left: .6em;
+		min-width: 1em;
+		padding: 0 .5em;
+		background-color: hsla(24, 20%, 50%,.4);
+		color: hsl(24, 20%, 95%);
+		font: bold 65%/1.5 sans-serif;
+		text-align: center;
+		vertical-align: .3em;
+		border-radius: 999px;
+		text-shadow: none;
+		box-shadow: 0 1px white;
+	}
+
+	.line-highlight[data-end]:after {
+		content: attr(data-end);
+		top: auto;
+		bottom: .4em;
+	}
+
+.line-numbers .line-highlight:before,
+.line-numbers .line-highlight:after {
+	content: none;
+}
+
+pre[id].linkable-line-numbers span.line-numbers-rows {
+	pointer-events: all;
+}
+pre[id].linkable-line-numbers span.line-numbers-rows > span:before {
+	cursor: pointer;
+}
+pre[id].linkable-line-numbers span.line-numbers-rows > span:hover:before {
+	background-color: rgba(128, 128, 128, .2);
 }
 
 pre[class*="language-"].line-numbers {
@@ -282,6 +353,7 @@ span.inline-color {
 	letter-spacing: -1px;
 	margin-right: 1em;
 	pointer-events: none;
+	text-align: right;
 
 	-webkit-user-select: none;
 	-moz-user-select: none;
@@ -290,7 +362,7 @@ span.inline-color {
 }
 
 .command-line-prompt > span:before {
-	color: #999;
+	opacity: 0.7;
 	content: ' ';
 	display: block;
 	padding-right: 0.8em;
@@ -306,6 +378,15 @@ span.inline-color {
 
 .command-line-prompt > span[data-prompt]:before {
 	content: attr(data-prompt);
+}
+
+.command-line-prompt > span[data-continuation-prompt]:before {
+	content: attr(data-continuation-prompt);
+}
+
+.command-line span.token.output {
+	/* Make shell output lines a bit lighter to distinguish them from shell commands */
+	opacity: 0.7;
 }
 
 .token.punctuation.brace-hover,

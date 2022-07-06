@@ -139,3 +139,13 @@ footer nav ul li a {
     }
 }
 
+/* Adjust Prism.js Defaults */
+code[class*="language-"],
+pre[class*="language-"] {
+    text-shadow: none;
+}
+
+code[class*="language-"] a,
+pre[class*="language-"] a{
+    color: inherit;
+}

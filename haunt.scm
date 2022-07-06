@@ -32,5 +32,6 @@
                        (static-directory "css")
                        (static-directory "js")
                        (static-directory "code")
+                       (static-directory "assets" "/")
                        about-page))
 

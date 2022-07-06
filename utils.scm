@@ -117,11 +117,17 @@
       ((head . tail)
        (loop tail (cons head result))))))
 
+
 (define (static-page title file-name body)
   (lambda (site posts)
-    (make-page file-name
-               (with-layout yewscion-theme site title body)
-               sxml->html)))
+    (serialized-artifact file-name
+                         (with-layout yewscion-theme site title body)
+                         sxml->html)))
+;; (define (static-page title file-name body)
+;;   (lambda (site posts)
+;;     (make-page file-name
+;;                (with-layout yewscion-theme site title body)
+;;                sxml->html)))
 ;; Working on Rewrite using Artifacts instead of pages, not working yet.
 ;; (define (static-page title file-name body)
 ;;   (serialized-artifact file-name body

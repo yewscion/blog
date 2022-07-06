@@ -46,6 +46,30 @@
              (html
               (head
                (meta (@ (charset "utf-8")))
+               (link (@ (rel "apple-touch-icon")
+                        (sizes "180x180")
+                        (href "/apple-touch-icon.png?v=20220705")))
+               (link (@ (rel "icon")
+                        (type "image/png")
+                        (sizes "32x32")
+                        (href "/favicon-32x32.png?v=20220705")))
+               (link (@ (rel "icon")
+                        (type "image/png")
+                        (sizes "16x16")
+                        (href "/favicon-16x16.png?v=20220705")))
+               (link (@ (rel "manifest")
+                        (href "/site.webmanifest?v=20220705")))
+               (link (@ (rel "mask-icon")
+                        (href "/safari-pinned-tab.svg?v=20220705")
+                        (color "#462700")))
+               (link (@ (rel "shortcut icon")
+                        (href "/favicon.ico?v=20220705")))
+               (meta (@ (name "msapplication-TileColor")
+                        (content "#000000")))
+               (meta (@ (name "msapplication-TileImage")
+                        (content "/mstile-144x144.png?v=20220705")))
+               (meta (@ (name "theme-color")
+                        (content "#462700")))
                (title ,(string-append title " — " (site-title site)))
                ,(stylesheet "normalize")
                ,(stylesheet "fonts")
@@ -63,34 +87,54 @@
                 (nav
                  (ul
                   (li
-                   (a (@ (href "https://fediring.net/previous?host=yewscion.com")) (character "←"))
-                   (a (@ (href "https://fediring.net/")) "Fediring")
-                   (a (@ (href "https://fediring.net/random")) "⇄")
-                   (a (@ (href "https://fediring.net/next?host=yewscion.com")) "→"))))
+                   (a (@
+                       (href "https://fediring.net/previous?host=yewscion.com"))
+                      (character "←"))
+                   (a (@
+                       (href "https://fediring.net/"))
+                      "Fediring")
+                   (a (@
+                       (href "https://fediring.net/random"))
+                      "⇄")
+                   (a (@
+                       (href "https://fediring.net/next?host=yewscion.com"))
+                      "→"))))
                 (p (@ (class "copyright"))
                    "© 2022 Christopher Rodriguez "
                    ,%cc-by-sa-button
                    " (I'm on the "
-                   (a (@ (rel "me") (href "https://tech.lgbt/@yewscion")) "Fediverse")
+                   (a (@
+                       (rel "me") (href "https://tech.lgbt/@yewscion"))
+                      "Fediverse")
                    ")")
                 (p "The text and images on this site are free culture "
                    "works available under the " ,%cc-by-sa-link " license.")
                 (p "This website is built with "
-                   (a (@ (href "https://dthompson.us/projects/haunt.html"))
+                   (a (@
+                       (href "https://dthompson.us/projects/haunt.html"))
                       "Haunt")
                    ", a static site generator written in "
-                   (a (@ (href "https://gnu.org/software/guile"))
+                   (a (@
+                       (href "https://gnu.org/software/guile"))
                       "Guile Scheme")
                    ". Background from "
-                   (a (@ (href "https://www.svgbackgrounds.com/")) "SVG Backgrounds")
+                   (a (@
+                       (href "https://www.svgbackgrounds.com/"))
+                      "SVG Backgrounds")
                    ". Most icons are part of "
-                   (a (@ (href "https://fontawesome.com/")) "Font Awesome")
+                   (a (@
+                       (href "https://fontawesome.com/"))
+                      "Font Awesome")
                    ". All content is written using "
-                   (a (@ (href "https://www.gnu.org/software/guile/manual/html_node/SXML.html"))
+                   (a (@
+                       (href
+                        "https://www.gnu.org/software/guile/manual/html_node/SXML.html"))
                       "SXML")
                    "."))
                ,(script-js "prism")
-               (script (@ (src "https://kit.fontawesome.com/362bd4fa7d.js") (cross-origin "anonymous")))))))
+               (script (@
+                        (src "https://kit.fontawesome.com/362bd4fa7d.js")
+                        (cross-origin "anonymous")))))))
          #:post-template
          (lambda (post)
            `(article
@@ -107,7 +151,8 @@
              (footer
               (p "RSS Feeds for Tags: "
                ,(map (lambda (x)
-                       `(a (@ (href ,(string-append "/feeds/tags/" x ".xml")))
+                       `(a (@
+                       (href ,(string-append "/feeds/tags/" x ".xml")))
                            ,(string-append x " ")))
                      (post-ref post 'tags)))
               )))
@@ -118,97 +163,24 @@
                             (site-post-slug site post) ".html"))
 
            `((h1 ,title " "
-                 (a (@ (href "/feed.xml"))
-                    (span (@ (class "fas fa-rss-square") (style "color: black; font-size: 1rem;") (title "RSS Feed")))))
+                 (a (@
+                       (href "/feed.xml"))
+                    (span (@ (class "fas fa-rss-square")
+                             (style "color: black; font-size: 1rem;")
+                             (title "RSS Feed")))))
              ,(map (lambda (post)
                      (let ((uri (string-append "/"
                                                (site-post-slug site post)
                                                ".html")))
                        `(div (@ (class "summary"))
-                             (h2 (a (@ (href ,uri))
+                             (h2 (a (@
+                       (href ,uri))
                                     ,(post-ref post 'title)))
                              (div (@ (class "date"))
                                   ,(date->string (post-date post)
                                                  "~B ~d, ~Y"))
                              (div (@ (class "post"))
                                   ,(first-paragraph post))
-                             (a (@ (href ,uri)) "read more →"))))
+                             (a (@
+                       (href ,uri)) "read more →"))))
                    posts)))))
-;; (define* (project-page #:key name file-name description usage requirements
-;;                        installation manual? license repo releases guix-package
-;;                        (irc-channel "#guile"))
-;;   (define (tarball-url version)
-;;     (string-append "https://files.dthompson.us/"
-;;                    repo "/" repo "-" version
-;;                    ".tar.gz"))
-;;   (define body
-;;     `((h1 ,name)
-;;       ,description
-;;       ,@(if usage
-;;             `((h2 "Usage")
-;;               ,usage)
-;;             '())
-;;       ,@(if manual?
-;;          `((h2 "Documentation")
-;;            (p ,(anchor "View the reference manual"
-;;                        (string-append "/manuals/" repo "/index.html"))))
-;;          '())
-;;       (h2 "Releases")
-;;       (ul ,(map (match-lambda
-;;                   ((version date)
-;;                    (let ((url (tarball-url version)))
-;;                      `(li ,(date->string date "~Y-~m-~d")
-;;                           " — " ,version " — "
-;;                           ,(anchor (string-append repo "-" version ".tar.gz")
-;;                                    url)
-;;                           " — "
-;;                           ,(anchor "GPG signature"
-;;                                    (string-append url ".asc"))))))
-;;                 releases))
-;;       (h2 "Requirements")
-;;       (ul ,(map (lambda (requirement)
-;;                   `(li ,requirement))
-;;                 requirements))
-;;       (h2 "Installation")
-;;       ,@(if installation
-;;             (list installation)
-;;             (match (car releases)
-;;               ((version _)
-;;                `(,@(if guix-package
-;;                        `((p "To install " ,name " with the GNU Guix package manager, run:")
-;;                          (pre "guix install " ,guix-package))
-;;                        '())
-;;                  (p "To build and install " ,name " from source, run:")
-;;                  (pre "wget "
-;;                       ,(tarball-url version)
-;;                       "
-;; tar xf "
-;;                       ,repo "-" ,version ".tar.gz"
-;;                       "
-;; cd "
-;;                       ,repo "-" ,version
-;;                       "
-;; ./configure
-;; make
-;; make install")))))
-;;       (h2 "License")
-;;       (p ,license)
-;;       (h2 "Git Repository")
-;;       ,@(let ((url (string-append "https://git.dthompson.us/" repo ".git")))
-;;           `((p ,name " is developed using the Git version control
-;; system. The official repository is hosted at "
-;;                ,(anchor url url) ".")
-;;             (p "To clone the repository, run:")
-;;             (pre "git clone " ,url)))
-;;       (h2 "Community")
-;;       (p "Real-time discussion for " ,name " can be found on the "
-;;          (code ,irc-channel)
-;;          " channel on the "
-;;          ,(anchor "Libera.chat" "https://libera.chat")
-;;          " IRC network")
-;;       (h2 "Contributing")
-;;       (p "Send patches and bug reports to "
-;;          ,(anchor "davet@gnu.org" "mailto:davet@gnu.org")
-;;          ".")))
-
-;;   (static-page name (string-append "projects/" file-name) body))
