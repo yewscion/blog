@@ -1,0 +1,90 @@
+(begin
+  (use-modules (srfi srfi-19)                     ; For Dates
+               (cdr255 userlib))                  ; My Userlib
+  (let
+                                                  ; Any Links should be bound to
+                                                  ; symbols here.
+      ((blog "https://yewscion.com")
+       (home "https://cdr255.com")
+       (hack "https://hackerx.org/"))
+                                                  ; Reference these below with
+                                                  ; ,(anchor "text" symbol)
+
+    `((title .
+             "Research for Research")
+      (author .
+              "Christopher Rodriguez")
+      (tags "academia" "computer-science" "research")
+                                                  ; make-date
+                                                  ; ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 7 8 2022 (* -5 3600))))
+      (content
+                                                  ; Most Posts should have 1-3
+                                                  ; h2 elements. The h1 is
+                                                  ; reserved for the site
+                                                  ; title. Make sure to create
+                                                  ; link symbols above. And
+                                                  ; remember to escape all
+                                                  ; double-quotes!
+       (p "I've recently come to a major conclusion about one of my life goals:
+I want to obtain a PhD in Computer Science, and work in the research field in
+some capacity (at least for a while). Getting there from here might be a long
+road, but it is one I want to walk down. And recently, I've gotten some advice
+that outlines a path I can take.")
+       (h2 "Path from Advice")
+       ,(codeblock "scheme"
+                   (get-file-as-string "code/2022-08-07.scm"))
+       (p "Upon realizing that this was a goal I wanted to pursue, I had
+remarkably few resources to begin work on it. In short, I didn't know what I
+didn't know, and what I " (em "did") "know looked like an impassible
+mountain. So, I decided it was time to start asking questions.")
+       (p "I have a mentor" ,(endnote 1) " at work, and she has a Master's
+Degree in Software Engineering. I'd also received an invite to a local "
+,(anchor
+       "HackerX" hack) " event, where there would be a lot" ,(endnote 2) " of
+people in the software field that I might be able to ask questions of. And
+finally, just mentioning my goal to as many people as I can has worked for me"
+,(endnote 3) " in the past when I've needed advice, so I also did that.  In
+aggregate, I received a few specific recommendations:")
+       (ol
+        (li "It is vital to have a personal direction when it comes to research.
+Find out what You are actually interested in, as Computer Science has a lot of
+subdisciplines.")
+        (li "Have an attitude of exploration within that personal
+recommendation.  Don't lock Yourself down to a specific idea; try a lot of
+different things to find out what really resonates with You before starting Your
+graduate program.")
+        (li "'Real Human Connections' are likely the most beneficial way for me
+to get started. Reaching out to those local to me who are working (or have
+worked) on something tangential to my interests, and asking to help them with
+their work, is a great way to get involved."))
+       (p "With this in mind, I'll start looking over the various subdisciplines
+in Computer Science (expect a blog post on that as well), and move forward once
+my survey of those is complete. Hopefully, I can (within the next year or so)
+help someone out with some work they are currently doing, and start building up
+the experience I'll need to get into this field.")
+       (p "It's always nice to have clear goals in front of me. Maybe that's why
+I like programming.")
+       (hr)
+       (section (@ (class "endnotes"))
+                ,(endnote-content 1 `("One of the biggest things I've gotten out
+of my time at my current job is experiencing a mentor system. I think everyone
+should give it a shot, and have found it very helpful for me to have someone to
+discuss my goals and such with, who has more experience than I do."))
+                ,(endnote-content 2 `("I was actually both not as impressed and
+not as disappointed as I thought I would be with this event. I'd do one again,
+just because it did actually help me to make connections with people who live
+near me in my field that I otherwise would not have been able to. But I do wish
+it were better attended, and had less technical issues."))
+                ,(endnote-content 3 `("When I was self-employed, there were a
+lot of things I had no idea about. Paying taxes, finding customers, expensing
+gas… I needed advice on a lot of things others might have companies do for
+them. But, talking about that need to those I associated wth got me an answer,
+most of the time.")) )))))
+
+;; Local Variables:
+;; mode: scheme
+;; fill-column: 80
+;; comment-column: 50
+;; fill-paragraph-function: cdr:lisp-fill-paragraph
+;; End:

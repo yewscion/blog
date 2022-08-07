@@ -3,4 +3,4 @@
          (projectile-project-run-cmd . "haunt serve")
          (projectile-project-install-cmd . "rsync -avzh site/* cdr255.com:/srv/http/yewscion/")
          ))
- (scheme-mode . ((fill-paragraph-function . cdr:lisp-fill-paragraph))))
+ (scheme-mode . ()))
