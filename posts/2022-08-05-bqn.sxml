@@ -1,0 +1,194 @@
+(begin
+  (use-modules (srfi srfi-19))                    ; For Dates
+  (let
+                                                  ; Any Links should be bound to
+                                                  ; symbols here.
+      ((anon "https://en.wikipedia.org/wiki/Anonymous_function")
+       (apl "https://en.wikipedia.org/wiki/APL_(programming_language)")
+       (based "https://mlochbaum.github.io/BQN/doc/based.html")
+       (blog "https://yewscion.com")
+       (bqn "https://mlochbaum.github.io/BQN/index.html")
+       (bqncomm "https://mlochbaum.github.io/BQN/community/index.html")
+       (bqnfirst (string-append "https://github.com/mlochbaum/BQN/commit/"
+                                "1f784354ed9f5a36b44dfa213f16a498c68174cb"))
+       (nqnfirst (string-append "https://github.com/mlochbaum/BQN2NGN/commit/"
+                                "f63118f326d999008d11e265f459981762123422"))
+       (cfg "https://en.wikipedia.org/wiki/Context-free_grammar")
+       (class "https://en.wikipedia.org/wiki/Class_(computer_programming)")
+       (comb "https://en.wikipedia.org/wiki/Combinatory_logic")
+       (conor "https://github.com/codereport")
+       (esr "http://www.catb.org/~esr/faqs/hacker-howto.html#skills1")
+       (expat (string-append "https://en.wikipedia.org/wiki/"
+                             "MIT_License#Ambiguity_and_variants"))
+       (ffunc "https://en.wikipedia.org/wiki/First-class_function")
+       (fp "https://en.wikipedia.org/wiki/Functional_programming")
+       (fsdg (string-append "https://www.gnu.org/distros/"
+                            "free-system-distribution-guidelines.en.html"))
+       (gpl "https://www.gnu.org/licenses/gpl-3.0.en.html")
+       (hfunc "https://en.wikipedia.org/wiki/Higher-order_function")
+       (home "https://cdr255.com")
+       (isc "https://en.wikipedia.org/wiki/ISC_license")
+       (iverson "https://en.wikipedia.org/wiki/Kenneth_E._Iverson")
+       (leading "https://mlochbaum.github.io/BQN/doc/leading.html")
+       (meta (string-append
+              "https://ericnormand.me/podcast/"
+              "do-we-use-metacircular-evaluators-in-real-life"))
+       (nses "https://en.wikipedia.org/wiki/Namespace")
+       (oop "https://en.wikipedia.org/wiki/Object-oriented_programming")
+       (patch "https://issues.guix.gnu.org/56989")
+       (prism "https://github.com/PrismJS/prism/pull/3515")
+       (trains "https://mlochbaum.github.io/BQN/doc/train.html")
+       (unicode "https://en.wikipedia.org/wiki/Unicode"))
+                                                  ; Reference these below with
+                                                  ; ,(anchor "text" symbol)
+    
+    `((title .
+             "Big Question Notation")
+      (author .
+              "Christopher Rodriguez")
+      (tags "bqn" "software" "programming")
+                                                  ; make-date
+                                                  ; ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 5 8 2022 (* -5 3600))))
+      (content
+                                                  ; Most Posts should have 1-3
+                                                  ; h2 elements. The h1 is
+                                                  ; reserved for the site
+                                                  ; title. Make sure to create
+                                                  ; link symbols above. And
+                                                  ; remember to escape all
+                                                  ; double-quotes!
+       (p "Recently, I've been enamoured with a language called "
+          ,(anchor "BQN" bqn)
+          ". I've started a "
+          ,(anchor "bit" patch)
+          " of "
+          ,(anchor "leg-work" prism)
+          " to add some of the tooling support I want to have for a language
+that I use, which should be finished soon. But then, I will have another
+language in my toolbox to help put thoughts into a computer. And so, I wanted to
+briefly talk about this one here.")
+       (h2 "What is BQN?")
+       ,(codeblock "bqn"
+                   "Life←{
+   r←¯1(⌽⎉1)¯1⌽(2+≢𝕩)↑𝕩
+   s←∨´ (1∾<r) ∧ 3‿4 = <+´⥊ ¯1‿0‿1 (⌽⎉1)⌜ ¯1‿0‿1 ⌽⌜ <r
+   1(↓⎉1) ¯1(↓⎉1) 1↓ ¯1↓s
+}
+ 
+blinker←>⟨0‿0‿0,1‿1‿1,0‿0‿0⟩
+(<\".#\") ⊏¨˜  Life⍟(↕3) blinker")
+       (p "BQN is an Array Programming"
+          ,(endnote 1)
+          " language in the style of "
+          ,(anchor "Iverson" iverson)
+          " and "
+          ,(anchor "APL" apl)
+          ", but with a few crucial differences that make it interesting and
+important to me:")
+       (ol
+        (li "It is a current-day language, created within the last decade"
+            ,(endnote 2)
+            " or so. This means a few things are true: "
+            ,(anchor "Unicode" unicode)
+            " Support"
+            ,(endnote 3)
+            " is baked in. So are "
+            ,(anchor "first-class functions" ffunc)
+            " and "
+            ,(anchor "combinators" comb)
+            "(from "
+            ,(anchor "Functional Programming" fp)
+            "), and "
+            ,(anchor "namespaces" nses)
+            " and "
+            ,(anchor "classes" class)
+            "(from "
+            ,(anchor "Object Oriented Programming" oop)
+            "). And a pretty-active-for-its-size "
+            ,(anchor "community" bqncomm)
+            " of people online contributing, discussing, and using the language.")
+        (li "It is built on a lot of prior experience. It supports both the "
+            ,(anchor "based array" based)
+            " and "
+            ,(anchor "leading axis" leading)
+            " models. It has a "
+            ,(anchor "context-free grammar" cfg)
+            " that makes it easily understandable and interpretable. And it adds both "
+            ,(anchor "anonymous functions" anon)
+            ", "
+            ,(anchor "higher-order functions" hfunc)
+            ", and "
+            ,(anchor "trains" trains)
+            " to the mix, allowing for very succint and elegantly combined code.")
+        (li "It is defined in itself (not "
+            ,(anchor "metacircular" meta)
+            ,(endnote 4)
+            "), and can be built from source with a realtively simple"
+            ,(endnote 5)
+            " dependency tree.")
+        (li "Everything so has been released under an "
+            ,(anchor "FSDG-compatible" fsdg)
+            " license (either "
+            ,(anchor "ISC" isc)
+            ", "
+            ,(anchor "expat" expat)
+            ", or "
+            ,(anchor "GPLv3" gpl)
+            "). This is vital for me, as I don't want to waste my time learning
+proprietary software more than I have to."))
+       (p "This all makes for a language I am very excited to learn how to use,
+and one that will fit well for my needs"
+          ,(endnote 6)
+          " going forward.")
+       (h2 "Where I Am Currently")
+       ,(codeblock "bqn"
+                   "Flip ← {m←2|+⌜˜↕≠𝕩 ⋄ (⍉𝕩×¬m)+𝕩×m}
+Zz   ← {Flip ⍋∘⍋⌾⥊+⌜˜↕𝕩}")
+       (p "Right now, I am still learning the basics of the language.")
+       (p "I have the tools installed, I just need to actually learn to use
+them. There is always a period at the beginning of learning a new language where
+easy things are difficult and difficult things seem impossible. I wouldn't
+necessarily say I am there, but I would say I am not far from it.")
+       (p "One thing I have noticed is there does not seem to be a way to do
+multi-line definitions (like in the Life Example above) inside of the REPL. I'll
+need to get clarity on that, because that limitation will make my approach
+different (I'll need to pass files instead of strings to a repl, for
+instance).")
+       (p "Either way, I am excited to begin climbing this mountain! I'm certain
+I will learn a lot!")
+       (hr)
+       (section (@ (class "endnotes"))
+                ,(endnote-content 1 "My goal when looking at new languages is to
+expand my mind in some way. The second-to-last thing I want to spend my time
+doing is learning 20 different flavors of C-style notation (the last thing is
+using any language with significant whitespace, ugh). I have dabbled with APL in
+the past, but I've never truly grokked Array Programming, and I'm looking
+forward to doing so with BQN.")
+                ,(endnote-content 2 `("The earliest commit in the specification
+repo is " ,(anchor "from 2020" bqnfirst)
+", and the earliest commit in the repo it grew
+out of is " ,(anchor "from 2011" nqnfirst)
+"."))
+                ,(endnote-content 3 "It is 2022, and I use unicode every day for
+one thing or another. I don't fault older languages for their limitations, but
+I'd rather learn those that support at least UTF-8 at this point")
+                ,(endnote-content 4 "As mentioned in the link, metacircular
+doesn't mean 'Defined in Itself'. It refers to a system of circular evaluation
+used in certain contexts to mutually recurse. From what I can see, BQN doesn't
+do that (at least not yet).")
+                ,(endnote-content 5 "JDK7+ → dbqn → bqn bytecode → cbqn for
+bootstrapping → singeli for bootstrapping → cbqn")
+                ,(endnote-content 6 `("My long-term goal is to build up my own set
+of languages (sort of like was recommended by " ,(anchor "Eric S. Raymond" esr)
+"), but instead of those recommendations they
+will be: A Lisp, An Object-Oriented Language, a Scripting Language, a Web
+Language, an Array Language, and a Logic Language. This could turn into its own
+post, so I'll leave it there… I just want to have a clear set of tools to reach
+for in differrent situations, basically.")))))))
+
+;; Local Variables:
+;; mode: scheme
+;; fill-column: 80
+;; comment-column: 50
+;; End:
