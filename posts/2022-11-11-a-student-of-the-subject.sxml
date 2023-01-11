@@ -1,0 +1,120 @@
+(begin
+  (use-modules (srfi srfi-19))                    ; For Dates
+  (let
+                                                  ; Any Links should be bound to
+                                                  ; symbols here.
+      ((blog "https://yewscion.com")
+       (home "https://cdr255.com"))
+                                                  ; Reference these below with
+                                                  ; ,(anchor "text" symbol)
+    
+    `((title .
+             "Title of Post")
+      (author .
+              "Christopher Rodriguez")
+      (tags "up" "to" "four" "tags")
+                                                  ; make-date
+                                                  ; ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 8 1 2022 (* -5 3600))))
+      (content
+                                                  ; Most Posts should have 1-3
+                                                  ; h2 elements. The h1 is
+                                                  ; reserved for the site
+                                                  ; title. Make sure to create
+                                                  ; link symbols above. And
+                                                  ; remember to escape all
+                                                  ; double-quotes!
+       (p "This past term"
+          ,(endnote 1)
+          ")
+       (h2 "First Header")
+       ,(codeblock "scheme"
+                   "(display \"Hello world!\")")
+       (p "First Header Paragraph")
+       (hr)
+       (section (@ (class "endnotes"))
+                (endnote-content 1 "This is the first endnote")
+                )))))
+
+This past term I had an illumination regarding how I work best academically.
+
+I have long struggled with working effectively in a class when I don't really
+have interest in a subject, or when I feel like the lessons being taught are
+ones I already know. This generally causes me to fall behind in my work, and
+results in me needing to make a mad dash to the finish line at the end of a
+term in order to not fail—if that is even an option that the
+teacher/professor/school gives me.
+
+However, I think I've finally discovered a way in which I work well, even if
+I don't necessarily care about a subject. It requires some setup time, but
+once that time has been spent it allows me to work very efficiently
+thereafter. And best of all, it doesn't make me feel like I am wasting my
+time.
+
+For now, I'm referring to this as working "as a student of the subject".
+
+Basically, I work best when I am passively familiar with a subject, can take
+my time to think about how different references relate to one another, and
+can rely on a set of notes I've taken in the past. If approaching something I
+am unfamiliar with, breaking it into smaller topics and researching those
+first—recursively, if necessary—allows me to address the topic in a
+comprehensive and comfortable way.
+
+I'll contrast this with some of the approaches I've tried in the past first,
+and then I'll try to explain what about this methodology works well with my
+brain.
+
+Working "the right way"—where I only write about what I'm interested in and
+have thought a lot about, supporting that topic using my experience,
+research, and thoughts—is not productive and doesn't lead to learning.
+
+Working "for the assignment"—where I view the prompt, do research, form a
+response, and then edit and submit all in one go—feels so disjointed and
+pointless to me. This is doubly true when I'm not interested in the subject;
+Ennui sets in very quickly.
+
+Working "to get a good grade"—by doing exactly what is required by a rubric,
+and nothing more—makes me feel like a fraud and think I am wasting my time,
+even if I care about the subject.
+
+These were the big three I was oscillating between, because when the topic of
+finding the workflow difficult (as opposed to the workload; meaning the
+process of study, not the topic of study) these are the ones that are
+generally mentioned.
+
+Doing things "as a student of the subject" makes me feel like I am gaining
+something—something I can quantify, in notes taken and papers/articles/books
+read—and lets me focus on an activity I enjoy doing regardless of the
+topic—namely, research.
+
+I /love/ doing research, especially when I'm able to take two disparate ideas
+and connect them to one another through reference and citation. Synthesizing
+new ideas or concepts by combining others is what drew me to Computer Science
+in the first place, and it is something I hope to do as part of my career
+within the next decade or so.
+
+I think this was one of the bigger hurdles for me, to be honest: If I enjoy
+research so much, why did it take me 5 weeks to write a review of this case
+study? And this is a simple, 3 page case study! Why was I finding it so
+difficult?
+
+Well, I had no foundation from which to review it, and felt as though doing
+so through solely my own thoughts—or those of my textbook and lecturer—was
+not actually reviewing the case study. Furthermore, the brevity of the case
+study at 3 pages made it difficult for me to discover what I didn't know—this
+is where the illumination came in, as this has happened more than a few times
+over the last year.
+
+So, going forward, my process is going to be to work as a student of the
+subjct: Break new concepts down into ones I can research, tackle those before
+trying to address the actual topic, and then return to the topic with a
+passing familiarity, a foundation of thoughts surrounding it, and a
+collection of notes related to the topic that I can use to support my ideas.
+
+
+
+;; Local Variables:
+;; mode: scheme
+;; fill-column: 80
+;; comment-column: 50
+;; End:
