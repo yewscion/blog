@@ -46,9 +46,11 @@ to explore why here.")
           ", the main workflow for using a Zettelkasten basically goes like this:"
           (ol
            (li "Find something interesting.")
-           (li "Read that something through, noting the parts You want to take note of.")
+           (li "Read that something through, noting the parts You want to take
+note of.")
            (li "Make the notes for those parts.")
-           (li "File them in the Zettelkasten, which now has that information forever."))
+           (li "File them in the Zettelkasten, which now has that information
+forever."))
           "This is a very useful and thorough process, that requires full
 understanding and interpretation of the material You are interfacing with. It
 seems like the best way to digest information, especially for someone who will
