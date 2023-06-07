@@ -67,6 +67,77 @@ header nav  ul  li  a {
     font-size: 2em;
 }
 
+/* Lists */
+/* Thanks https://www.the-art-of-web.com/css/format-dl/ */
+dl {
+    border: 3px double #ccc;
+    padding: 0.5em;
+}
+dt {
+    float: left;
+    clear: left;
+    width: 100px;
+    text-align: right;
+    font-weight: bold;
+    color: #004627;
+}
+dt::after {
+    content: ":";
+}
+dd {
+    margin: 0 0 0 110px;
+    padding: 0 0 0.5em 0;
+}
+dd::after {  /* clears proceeding dt(s) ensuring that the next dd will be after next dt */
+
+    content: "";
+
+    display: table;
+
+    clear: left;
+
+} 
+
+/* Quotes */
+
+blockquote{
+  font-size: 1.2em;
+  width:80%;
+  margin:50px auto;
+  color: #555555;
+  padding:1.2em 30px 1.2em 75px;
+  border-left:8px solid #004627 ;
+  line-height:1.6;
+  position: relative;
+  background:#EDEDED;
+}
+
+blockquote::before{
+  content: "\201C";
+  color: #00462733;
+  font-size:4em;
+  position: absolute;
+  left: 10px;
+  top:-10px;
+}
+
+blockquote::after{
+    content: '(source: ' attr(attribution) ', in ' attr(cite) ' on ' attr(datetime) ') ';
+    font-style:italic;
+    font-size: 0.5em;
+    display: block;
+}
+
+blockquote span{
+  display:block;
+  color:#333333;
+  font-style: normal;
+  font-weight: bold;
+  margin-top:1em;
+}
+
+
+
 /* Summaries */
 .summary {
     margin-top: 1em;

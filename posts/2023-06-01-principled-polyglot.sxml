@@ -1,0 +1,145 @@
+(begin
+  (use-modules (srfi srfi-19)                     ; For Dates
+               (cdr255 userlib))                  ; My Userlib
+  (let
+                                                  ; Any Links should be bound to
+                                                  ; symbols here.
+      ((apl "https://www.gnu.org/software/apl/apl-intro.html")
+       (bash "https://www.gnu.org/software/bash/")
+       (c "https://www.open-std.org/jtc1/sc22/wg14/")
+       (elisp "https://www.gnu.org/software/emacs/manual/html_node/elisp/")
+       (epi "https://cpsc.yale.edu/epigrams-programming")
+       (esr "http://www.catb.org/~esr/faqs/hacker-howto.html#skills1")
+       (forth "https://www.gnu.org/software/gforth/")
+       (guile "https://www.gnu.org/software/guile/")
+       (k "https://github.com/kevinlawler/kona")
+       (ocaml "https://ocaml.org/")
+       (pod "https://www.arraycast.com/episodes/episode41-john-earnest")
+       (uxntal "https://wiki.xxiivv.com/site/uxntal.html"))
+                                                  ; Reference these below with
+                                                  ; ,(anchor "text" symbol)
+    
+    `((title .
+             "Principled Polyglot")
+      (author .
+              "Christopher Rodriguez")
+      (tags "programming" "philosophy")
+                                                  ; make-date
+                                                  ; ns s m h d m yyyy tz
+      (date . (unquote (make-date 0 0 0 0 1 6 2023 (* -4 3600))))
+      (content
+                                                  ; Most Posts should have 1-3
+                                                  ; h2 elements. The h1 is
+                                                  ; reserved for the site
+                                                  ; title. Make sure to create
+                                                  ; link symbols above. And
+                                                  ; remember to escape all
+                                                  ; double-quotes!
+       (p "I've had a few major changes in my life recently. One of the more minor
+ones—rewriting the tool I made to write academic papers in a controlled LuaLaTeX
+environment—has made me reconsider what I consider to be \"my\" programming
+languages: The languages that, should a project not require a specific language,
+are the ones I would choose from, personally.")
+       (h2 "Conception")
+       ,(codeblock "scheme"
+                   "(define (bluebird action procedure)
+  (lambda* (#:rest args)
+    (apply action (list (apply procedure args)))))")
+       (p
+        "Thinking about it with some introspection, I think this concept became
+wedged in my brain back in high school when I happened upon Eric S. Raymond's
+\"" ,(anchor "How to Become a Hacker" esr) "\", with it's \"Learn How to
+Program\" section. It outlined languages and categories thereof in a way that
+helped me cement " ,(anchor "Epigram 19" epi) " as an opinion I shared. In my
+adult life, I have been searching constantly for languages that change how I
+think about programming.")
+       (p
+        "In that time, I have come across and tried out many languages: Starting
+with C++ (I know), I then moved forward with everything from Clojure to BQN, as
+my search for a set of languages that spoke to me continued. I found that I tend
+to like languages that don't offer too much tooling as a core part of their
+language: Clojure's leiningen and Erlang's OTP felt like putting on a sweater
+that had shrunk in the wash to me. I also found that I had a few major technical
+requirements: Unicode support meant a lot to me, as did reproducability and a
+libre-adjacent license.")
+       (p
+        "When it came down to it, though, I think the most important factor to
+me was whether I enjoyed using the syntax or not. This is also probably the
+thing that took me the longest to decide about a language, as there is no
+accounting for taste in a quantifiable way. However, I do know that boilerplate
+is something I'm not a huge fan of, especially if that boilerplate is something
+I just need to retype in every new file. I'm also a big believer in notation as
+a tool of thought, and so the myriad languages with an ALGOL-like syntax did not
+interest me nearly as much as those that forced me to learn how their syntax
+worked.")
+       (h2 "Result")
+       ,(codeblock "apl"
+                   (get-file-as-string "code/with-tax.apl"))
+       (p
+        "That said, for me, Guile Scheme has become the language I reach for
+most often. It is the language my OS is configured and largely written in, the
+language the tools I create are generally written in, and in general the
+\"default\" language I would use when implementing an idea. It suits me very
+well in terms of portability, performance, syntax (Yeah, I'm a LISPer), and
+general vibe. But it is not the only language I want to use.")
+
+       (p "I was listening to an episode of the " ,(anchor "Array Cast" pod) "
+where the guest said something that resonated with me: ")
+       (blockquote (@ (cite "https://www.arraycast.com/episode-41-transcript")
+                      (datetime "2023-06-01T14:39:00-04:00")
+                      (attribution "John Earnest"))
+,(get-file-as-string "quotes/2022-11-25.john-earnest.array-and-forth.txt"))
+       (p
+        "The feelings I experienced when I heard that quote were astounding. I
+wholeheartedly agreed, and with that, FORTH and k" ,(endnote 1) " became
+languages I had to use. In many ways, the above comments can apply—albeit in a
+more theoretical way, as opposted to the technical way they are presented and
+used there—to Scheme as well. I guess that's me niche, in the end.")
+       (p
+        "In addition to these three—the core of my current toolset—I am also
+going to choose a few more mainstream languages for less verbose reasons: C is
+the language of UNIX, and is so prolific and portable that it would be a mistake
+to exclude it. It will fill the portable and high-performant compiled language
+for me very nicely. GNU APL is the non-ASCII Array Language I have felt the most
+comfortable using, and works well for scripting and prototyping more complex
+concepts. Uxn is the virtual machine I like the most, and it most aligns with my
+goals, so uxntal is the VM language I will use. Emacs Lisp for my
+editor (obviously) and Bash for my Shell (yup). Which just leaves the matter of
+the purely functional language—which will serve as the language for theoretical,
+provable concepts and formalizations—between OCaml and Haskell…")
+       (p
+        "I'll be honest here, I haven't been successful in my attempts to use
+either of these titans at this point, and for a few reasons. First is the matter
+of tooling, as mentioned above: OCaml's dune and Haskell's cabal are both very
+opinionated about directory structure, dependencies, and such. Integrating them
+with my OS, GNU Guix, means I not only need to learn the tooling, but also how
+to subvert it to allow for fully reproducable builds. There's also the matter of
+Unicode, where Haskell has had full support for a long time, and OCaml has only
+recently added it. Then there is the effort to build both of these: GHC takes a
+calendar year (hyperbole) to compile on a local machine—even moreso on the
+low-powered ARM machines I have—whereas OCaml is quicker and available as a
+substitute for ARM64 currently.")
+       (p "So, I guess, for now, OCaml wins. But I am open to other opinions, if
+You have good points to share.")
+       (p "In summation, my languages at this time are:")
+       (dl
+        (dt ,(anchor "Bash" bash)) (dd "Shell")
+        (dt ,(anchor "C" c)) (dd "System Programming, FFI, High Perf and Port.")
+        (dt ,(anchor "Emacs Lisp" elisp)) (dd "Editor Config")
+        (dt ,(anchor "FORTH" forth)) (dd "Stack Language, Minimal System")
+        (dt ,(anchor "GNU APL" apl)) (dd "Unicode Array language, Scripting")
+        (dt ,(anchor "Guile Scheme" guile)) (dd "Default language, Scheme,
+Lisp")
+        (dt ,(anchor "K" k)) (dd "ASCII Array Language, Minimal System")
+        (dt ,(anchor "OCaml" ocaml)) (dd "Functional, Formalization")
+        (dt ,(anchor "uxntal" uxntal)) (dd "VM, Assembled Language"))
+       (hr)
+       (section (@ (class "endnotes"))
+                (endnote-content 1 "Dialects TBD, though I have installed kona
+and gforth at this point.")  )))))
+
+;; Local Variables:
+;; mode: scheme
+;; fill-column: 80
+;; comment-column: 50
+;; End:

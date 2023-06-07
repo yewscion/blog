@@ -1,0 +1,16 @@
+If you look at k especially and FORTH, these are both languages that are
+made by eccentric creators with their own highly distinct style of problem
+solving that is centered on this idea of radical minimalism. In FORTH, you
+bend the problem in order to suit the language and the language to suit
+the problem. In order to try to find a balancing point where the entire
+system is as simple as possible. And in terms of languages, you know,
+FORTH is generally considered to be a pretty low level language. Although
+you can build it up to be suitable for a specific application. You know k
+is a comparatively, high level language, and frequently you're able to
+just solve problems directly in the language without introducing
+abstractions. But in both cases it's a system that has been like viciously
+attacked over its evolution. Constantly hacking things off and throwing
+away anything that doesn't carry its weight. So you end up with this thing
+that is uhm, you know. Instead of continuously growing and getting larger
+and more powerful, it is staying about the same size and becoming sharper
+and more effective.
